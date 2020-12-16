@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
-    namespace :v1 do
-      get 'search/index'
+    namespace :v1 do #, constraints: ApiConstraint.new(version: "1.buildpack-registry") do
+      get 'search', to: 'search#index'
+      get 'buildpacks/:namespace/:name', to: 'buildpacks#index'
+      get 'buildpacks/:namespace/:name/:version', to: 'buildpacks#show'
     end
   end
-  namespace :api do
-    namespace :v1 do
-      get 'buildpacks/index'
-      get 'buildpacks/show'
-    end
-  end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
